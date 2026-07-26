@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYZ - The Micro-Payout Creator Platform for India</title>
+    <meta name="description" content="XYZ is India's premium creator platform featuring real-time micro-payouts as low as 0.1 paisa, fully RBI compliant, driven by a 50-50 revenue split model.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-symbol">XYZ</div>
+                <span class="logo-text">CREATOR HUB</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="creator">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>Creator Portal</span>
+                </button>
+                <button class="nav-item" data-tab="viewer">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Viewer Hub</span>
+                </button>
+                <button class="nav-item" data-tab="kyc">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>RBI KYC Center</span>
+                </button>
+                <button class="nav-item" data-tab="pitch">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Investor Pitch</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="compliance-badge">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>RBI Sandbox V1.2</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="app-header">
+                <div class="header-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search creators, videos, pitches...">
+                </div>
+                <div class="header-profile">
+                    <div class="wallet-pill creator-wallet-pill">
+                        <i class="fa-solid fa-wallet"></i>
+                        <span class="label">Creator Ledger:</span>
+                        <span class="value" id="header-creator-balance">₹0.0000</span>
+                    </div>
+                    <div class="wallet-pill viewer-wallet-pill">
+                        <i class="fa-solid fa-coins"></i>
+                        <span class="label">Viewer Wallet:</span>
+                        <span class="value" id="header-viewer-balance">₹0.0000</span>
+                    </div>
+                    <div class="avatar">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Harsh" alt="Profile Avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tab Contents -->
+            <div class="tab-viewport">
+                
+                <!-- CREATOR PORTAL TAB -->
+                <section class="tab-panel active" id="tab-creator">
+                    <div class="dashboard-grid">
+                        <!-- Balance Card -->
+                        <div class="dashboard-card card-gradient-primary balance-card">
+                            <div class="card-header-small">
+                                <span>LIVE CREATOR EARNINGS LEDGER</span>
+                                <span class="badge badge-success">ACTIVE RAILS</span>
+                            </div>
+                            <div class="live-balance-container">
+                                <span class="currency">₹</span>
+                                <span class="integer-part" id="creator-integer">0</span>
+                                <span class="dot">.</span>
+                                <span class="fractional-part" id="creator-fraction">0000</span>
+                            </div>
+                            <p class="balance-subtext">Ticking in real-time based on active audience engagement (0.1 paisa payouts).</p>
+                            <div class="quick-stats-row">
+                                <div class="quick-stat">
+                                    <span class="stat-label">Earnings Rate</span>
+                                    <span class="stat-val text-neon-green" id="earnings-rate">₹0.015/sec</span>
+                                </div>
+                                <div class="quick-stat">
+                                    <span class="stat-label">Total Impressions</span>
+                                    <span class="stat-val" id="creator-impressions">0</span>
+                                </div>
+                                <div class="quick-stat">
+                                    <span class="stat-label">Platform Share</span>
+                                    <span class="stat-val">50% (₹-Split)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Daily Payout Form -->
+                        <div class="dashboard-card kyc-status-card">
+                            <h3><i class="fa-solid fa-bolt"></i> Daily Micro-Settlement (UPI)</h3>
+                            <p class="card-desc">Withdraw earnings instantly. XYZ settles down to ₹0.01 using our micro-escrow aggregation rail.</p>
+                            <form id="withdrawal-form" class="standard-form">
+                                <div class="form-group">
+                                    <label for="withdraw-upi">Payee UPI ID</label>
+                                    <input type="text" id="withdraw-upi" placeholder="creator@okhdfcbank" required value="harsh@okaxis">
+                                </div>
+                                <div class="form-group">
+                                    <label for="withdraw-amount">Amount (INR)</label>
+                                    <div class="input-with-action">
+                                        <input type="number" step="0.0001" min="0.001" id="withdraw-amount" placeholder="0.0000" required>
+                                        <button type="button" class="btn-secondary" id="btn-max-withdraw">MAX</button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-primary btn-full">
+                                    <i class="fa-solid fa-paper-plane"></i> Settlement Request
+                                </button>
+                            </form>
+                            <div class="withdrawal-status-box hidden" id="withdrawal-status">
+                                <span class="spinner"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                                <span class="status-msg">Routing through RBI Nodal Escrow Account...</span>
+                            </div>
+                        </div>
+
+                        <!-- Content Upload Simulator -->
+                        <div class="dashboard-card upload-card grid-span-2">
+                            <div class="card-title-row">
+                                <h3><i class="fa-solid fa-cloud-arrow-up"></i> Upload New Content (Mock Reel/Short)</h3>
+                                <span class="info-label">Define Ads & Payout Rates</span>
+                            </div>
+                            <form id="upload-form" class="upload-grid-form">
+                                <div class="form-group">
+                                    <label for="video-title">Short/Reel Title</label>
+                                    <input type="text" id="video-title" placeholder="e.g., Decolonizing Indian Creator Finance" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="video-url">GIF/Video URL (Mock Visual)</label>
+                                    <select id="video-url">
+                                        <option value="tech">https://images.unsplash.com/photo-tech-demo</option>
+                                        <option value="art">https://images.unsplash.com/photo-art-creative</option>
+                                        <option value="finance">https://images.unsplash.com/photo-finance-charts</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="video-category">Category</label>
+                                    <select id="video-category">
+                                        <option value="Education">Education & Finance</option>
+                                        <option value="Tech">Tech & Coding</option>
+                                        <option value="Comedy">Comedy & Skits</option>
+                                        <option value="Lifestyle">Lifestyle & Travel</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ad-cpm">Simulated Ad CPM (₹ per 1K views)</label>
+                                    <input type="number" id="ad-cpm" min="10" max="500" value="80" required>
+                                </div>
+                                <div class="form-group grid-span-all btn-row">
+                                    <button type="submit" class="btn-primary">
+                                        <i class="fa-solid fa-plus"></i> Publish to Feed
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Creator Content List -->
+                        <div class="dashboard-card list-card grid-span-all">
+                            <h3><i class="fa-solid fa-list-check"></i> Published Reels & Live Metrics</h3>
+                            <div class="table-responsive">
+                                <table class="metrics-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Video Details</th>
+                                            <th>Category</th>
+                                            <th>Live Views</th>
+                                            <th>CPM</th>
+                                            <th>Gross Ad Rev</th>
+                                            <th>50% Split Payout</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="creator-videos-table">
+                                        <!-- Will be injected by app.js -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- VIEWER HUB TAB -->
+                <section class="tab-panel" id="tab-viewer">
+                    <div class="viewer-layout">
+                        <!-- Reel Player Mockup -->
+                        <div class="player-container">
+                            <div class="player-header">
+                                <span class="live-indicator"><span class="dot-blink"></span> WATCH & EARN SIMULATOR</span>
+                                <div class="payout-ticker">
+                                    <i class="fa-solid fa-clock"></i> Earning: <span>0.05 Paisa/sec</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Video Visual Area -->
+                            <div class="player-viewport" id="player-viewport">
+                                <div class="video-overlay">
+                                    <div class="video-meta">
+                                        <h4 id="player-title">Decolonizing Indian Creator Finance</h4>
+                                        <p id="player-author">@harsh_creates • <span id="player-category">Education</span></p>
+                                    </div>
+                                    <div class="video-interactions">
+                                        <button class="action-btn" id="player-like-btn">
+                                            <i class="fa-solid fa-heart"></i>
+                                            <span id="player-likes">12.4K</span>
+                                        </button>
+                                        <button class="action-btn" id="player-comment-btn">
+                                            <i class="fa-solid fa-comment"></i>
+                                            <span>382</span>
+                                        </button>
+                                        <button class="action-btn" id="player-tip-btn">
+                                            <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                                            <span>Tip Creator</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="video-visual-bg" id="video-visual-bg">
+                                    <!-- Backround animation / image placeholder loaded by JS -->
+                                    <div class="gradient-animation-bg"></div>
+                                </div>
+                                <!-- Progress bar -->
+                                <div class="player-progress-bar">
+                                    <div class="progress-fill" id="player-progress"></div>
+                                </div>
+                            </div>
+
+                            <div class="player-controls">
+                                <button class="btn-control" id="prev-video-btn"><i class="fa-solid fa-chevron-up"></i> Previous</button>
+                                <button class="btn-control btn-play" id="play-pause-btn"><i class="fa-solid fa-pause"></i> Pause</button>
+                                <button class="btn-control" id="next-video-btn">Next <i class="fa-solid fa-chevron-down"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Viewer Wallet & Circular Economy Panel -->
+                        <div class="viewer-wallet-panel">
+                            <div class="dashboard-card card-gradient-secondary">
+                                <div class="card-header-small">
+                                    <span>YOUR VIEWER ATTENTION WALLET</span>
+                                    <span class="badge badge-accent">LEDGER-BASED</span>
+                                </div>
+                                <div class="viewer-balance-display">
+                                    <span class="currency">₹</span>
+                                    <span class="val" id="viewer-wallet-val">0.0000</span>
+                                </div>
+                                <p class="balance-subtext">Earned passively by watching advertisements and engaging with creators on XYZ.</p>
+                            </div>
+
+                            <div class="dashboard-card tip-card">
+                                <h3><i class="fa-solid fa-circle-dollar-to-slot text-accent"></i> Instantly Tip Creator</h3>
+                                <p class="card-desc">Support the current creator with your attention wallet balance. Zero UPI fees (off-chain ledger transaction).</p>
+                                <div class="tip-grid">
+                                    <button class="tip-option-btn" data-tip="0.001">0.1 Paisa</button>
+                                    <button class="tip-option-btn" data-tip="0.01">1 Paisa</button>
+                                    <button class="tip-option-btn" data-tip="0.1">10 Paisa</button>
+                                    <button class="tip-option-btn" data-tip="1">₹1.00</button>
+                                </div>
+                                <div class="form-group custom-tip-group">
+                                    <input type="number" step="0.001" min="0.001" id="custom-tip-amount" placeholder="Custom INR Amount">
+                                    <button class="btn-accent" id="btn-submit-tip">Send Tip</button>
+                                </div>
+                                <div class="tip-status-msg text-neon-green hidden" id="tip-success-msg">Tip sent successfully!</div>
+                            </div>
+
+                            <div class="dashboard-card attention-stats-card">
+                                <h3>Attention Economy Logs</h3>
+                                <ul class="attention-logs" id="viewer-logs">
+                                    <li class="log-item empty">Watch videos to begin generating ledger entries...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RBI KYC CENTER TAB -->
+                <section class="tab-panel" id="tab-kyc">
+                    <div class="kyc-layout">
+                        <!-- KYC Setup Form -->
+                        <div class="dashboard-card kyc-form-card">
+                            <div class="card-header-spaced">
+                                <h3><i class="fa-solid fa-building-columns text-primary"></i> RBI Mandatory Onboarding</h3>
+                                <span class="verification-status-pill pending" id="kyc-badge-status">
+                                    <i class="fa-solid fa-circle-exclamation"></i> KYC PENDING
+                                </span>
+                            </div>
+                            <p class="card-desc">Under RBI Guidelines for Payment Intermediaries (PMLA Act), creators and transacting users must verify credentials. Test invalid formats to see security safeguards.</p>
+                            
+                            <form id="kyc-verification-form" class="standard-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="kyc-name">Full Legal Name (As in PAN)</label>
+                                        <input type="text" id="kyc-name" placeholder="HARSH VARDHAN" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="kyc-pan">PAN Card Number</label>
+                                        <input type="text" id="kyc-pan" placeholder="ABCDE1234F" style="text-transform: uppercase;" required>
+                                        <span class="input-tip">Format: 5 letters, 4 numbers, 1 letter</span>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="kyc-aadhaar">Aadhaar Card Number</label>
+                                        <input type="text" id="kyc-aadhaar" placeholder="12-digit UID" required>
+                                        <span class="input-tip">12 digits (dashes allowed)</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="kyc-bank-upi">UPI ID for Settlements</label>
+                                        <input type="text" id="kyc-bank-upi" placeholder="upi@bankname" required value="harsh@okaxis">
+                                    </div>
+                                </div>
+                                <div class="compliance-checkbox-group">
+                                    <input type="checkbox" id="kyc-declare" required>
+                                    <label for="kyc-declare">I declare that the details provided are correct and I authorize XYZ to run real-time PAN validation via mock NSDL rails.</label>
+                                </div>
+                                <button type="submit" class="btn-primary btn-full">
+                                    <i class="fa-solid fa-shield-check"></i> Submit Verification to NSDL/UIDAI
+                                </button>
+                            </form>
+
+                            <div class="kyc-console-box" id="kyc-console">
+                                <span class="console-line text-muted">System idle. Awaiting compliance form submission...</span>
+                            </div>
+                        </div>
+
+                        <!-- RBI Compliance Guidelines and Framework Details -->
+                        <div class="dashboard-card rbi-framework-card">
+                            <h3><i class="fa-solid fa-scroll text-primary"></i> XYZ Compliance Framework</h3>
+                            <p class="card-desc">How we operate a micro-transaction engine within Indian laws:</p>
+                            
+                            <div class="compliance-accordions">
+                                <div class="accordion-item">
+                                    <div class="accordion-trigger">
+                                        <span>1. The Nodal/Escrow Structure</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <div class="accordion-content">
+                                        All user deposits and advertiser dues are stored in a **Partner Bank Nodal Account** monitored under RBI directions. XYZ acts as a Payment Intermediary, never holding proprietary control over user balances.
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-trigger">
+                                        <span>2. PAN Verification & TDS Logic</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <div class="accordion-content">
+                                        Real-time PAN Card checks are executed before bank withdrawals. Under Section 194R/194S of the IT Act, a 1% TDS is computed and reported directly to the Income Tax Department of India for creator earnings exceeding statutory limits.
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-trigger">
+                                        <span>3. Aggregate UPI Clearing Rails</span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <div class="accordion-content">
+                                        Rather than hitting national payment switches for individual 0.1 paisa balances, XYZ groups transactions internally. Settlements are cleared via automated NPCI/UPI 2.0 bulk payout hooks, keeping transaction overhead extremely low (₹0.15 flat per successful batch settlement).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- INVESTOR PITCH DECK & REVENUE CALCULATOR -->
+                <section class="tab-panel" id="tab-pitch">
+                    <div class="pitch-layout">
+                        <!-- Pitch Deck Slides Component -->
+                        <div class="pitch-deck-container">
+                            <div class="deck-header">
+                                <span><i class="fa-solid fa-file-powerpoint text-primary"></i> XYZ PITCH FOR MASSIVE FUNDING</span>
+                                <span class="slide-count">Slide <span id="slide-num">1</span> of 5</span>
+                            </div>
+                            <div class="deck-viewport">
+                                <!-- Slides -->
+                                <div class="slide active" data-slide="1">
+                                    <h2 class="slide-title">The Creator Economy Bottleneck</h2>
+                                    <div class="slide-content">
+                                        <div class="problem-grid">
+                                            <div class="grid-item problem-item">
+                                                <i class="fa-solid fa-hand-holding-dollar icon-red"></i>
+                                                <h4>High Payout Thresholds</h4>
+                                                <p>YouTube has a ₹8,000+ ($100) payout threshold. Small creators wait months or years to get paid their first rupee.</p>
+                                            </div>
+                                            <div class="grid-item problem-item">
+                                                <i class="fa-solid fa-ban icon-red"></i>
+                                                <h4>Attention Exploitation</h4>
+                                                <p>Viewers watch ads and create engagement but receive 0% of the financial upside. Their attention is mined for free.</p>
+                                            </div>
+                                            <div class="grid-item problem-item">
+                                                <i class="fa-solid fa-receipt icon-red"></i>
+                                                <h4>Micro-Transaction Costs</h4>
+                                                <p>Existing gateways charge flat fees of ₹1 to ₹2 per transaction, rendering sub-rupee payouts completely impossible.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="slide" data-slide="2">
+                                    <h2 class="slide-title">The XYZ Solution</h2>
+                                    <div class="slide-content">
+                                        <div class="solution-details">
+                                            <h3>Micro-Escrow Wallet Ledger (MEWL)</h3>
+                                            <p>We process millions of transactions down to <strong>0.1 paisa (₹0.001)</strong> on an off-chain digital ledger. Zero transaction fees on-platform.</p>
+                                            <div class="solution-points">
+                                                <div class="sol-point"><i class="fa-solid fa-circle-check text-neon-green"></i> <strong>Daily Settlements:</strong> Users cash out via UPI once batched ledger balances clear flat fee margins.</div>
+                                                <div class="sol-point"><i class="fa-solid fa-circle-check text-neon-green"></i> <strong>Circular Economy:</strong> Viewers tip creators using earnings generated directly from watch-time ad-splits.</div>
+                                                <div class="sol-point"><i class="fa-solid fa-circle-check text-neon-green"></i> <strong>RBI Gateways:</strong> Clean PAN/KYC tracking with partner bank automated sandbox APIs.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="slide" data-slide="3">
+                                    <h2 class="slide-title">Debunking AXIOS EDIC/TCET Rejection</h2>
+                                    <div class="slide-content">
+                                        <div class="rejection-debunk">
+                                            <blockquote>
+                                                "It is impossible to make bank transfers of 0.1 Paisa. Banking rails will crash under transaction costs."
+                                                <cite>— AXIOS EDIC/TCET Evaluation Panel</cite>
+                                            </blockquote>
+                                            <h4>Why They Were Wrong:</h4>
+                                            <div class="debunk-list">
+                                                <div class="debunk-item">
+                                                    <strong>1. Aggregation Strategy:</strong> We do *not* run a bank transfer for every view. We accumulate earnings in a secure ledger and disburse in batched UPI transfers.
+                                                </div>
+                                                <div class="debunk-item">
+                                                    <strong>2. Attention Circulation:</strong> Over 70% of viewer earnings are tipped back to creators, staying entirely within the internal ledger database (zero banking cost).
+                                                </div>
+                                                <div class="debunk-item">
+                                                    <strong>3. Profitability:</strong> The 50-50 revenue split on ads ensures ad payouts scale faster than disbursement fees.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="slide" data-slide="4">
+                                    <h2 class="slide-title">Market Size & Potential</h2>
+                                    <div class="slide-content">
+                                        <div class="market-stats">
+                                            <div class="market-stat-box">
+                                                <h3>450M+</h3>
+                                                <p>Monthly Active YouTube Users in India</p>
+                                            </div>
+                                            <div class="market-stat-box">
+                                                <h3>150M+</h3>
+                                                <p>Active Creator Economy Participants in Tier 2/3 cities</p>
+                                            </div>
+                                            <div class="market-stat-box">
+                                                <h3>₹2,400 Cr</h3>
+                                                <p>Addressable Digital Ad Spend Market (India Creator Ecosystem)</p>
+                                            </div>
+                                        </div>
+                                        <p class="slide-footer-text">Indian users love micro-earning models (like scratch cards, coins). Offering daily micro-cashouts creates a hyper-engaged viral loop.</p>
+                                    </div>
+                                </div>
+
+                                <div class="slide" data-slide="5">
+                                    <h2 class="slide-title">50-50 Business Model Split</h2>
+                                    <div class="slide-content">
+                                        <div class="split-visual-container">
+                                            <div class="split-circle">
+                                                <div class="split-slice platform">
+                                                    <span>50% XYZ Platform</span>
+                                                    <p>Server upkeep, transaction fees, matching pool & profits</p>
+                                                </div>
+                                                <div class="split-slice creator">
+                                                    <span>50% Creator & Viewer</span>
+                                                    <p>Direct payouts, tips, attention awards</p>
+                                                </div>
+                                            </div>
+                                            <div class="split-math-box">
+                                                <h4>Funding Ask: ₹5,000,000 (~$60K USD)</h4>
+                                                <p>To fund RBI sandbox bank security deposits, live API connections, and launch seed marketing in 3 colleges (including TCET).</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="deck-controls">
+                                <button class="btn-deck-nav" id="prev-slide-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                                <div class="deck-dots" id="deck-dots">
+                                    <span class="dot active"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                                <button class="btn-deck-nav" id="next-slide-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Revenue & Scaling Calculator -->
+                        <div class="calculator-container">
+                            <div class="dashboard-card calc-card">
+                                <h3><i class="fa-solid fa-calculator text-accent"></i> VC Revenue & Scaling Calculator</h3>
+                                <p class="card-desc">Adjust the dials to see how the 50-50 split makes micro-payments highly profitable at scale.</p>
+                                
+                                <div class="calc-sliders">
+                                    <div class="slider-group">
+                                        <div class="slider-header">
+                                            <label for="range-dau">Daily Active Users (DAUs)</label>
+                                            <span class="slider-val" id="val-dau">1,000,000</span>
+                                        </div>
+                                        <input type="range" id="range-dau" min="100000" max="10000000" step="100000" value="1000000">
+                                    </div>
+
+                                    <div class="slider-group">
+                                        <div class="slider-header">
+                                            <label for="range-views">Avg. Video Views / User / Day</label>
+                                            <span class="slider-val" id="val-views">10</span>
+                                        </div>
+                                        <input type="range" id="range-views" min="1" max="50" step="1" value="10">
+                                    </div>
+
+                                    <div class="slider-group">
+                                        <div class="slider-header">
+                                            <label for="range-cpm">Ad CPM (₹ per 1000 views)</label>
+                                            <span class="slider-val" id="val-cpm">₹80</span>
+                                        </div>
+                                        <input type="range" id="range-cpm" min="20" max="250" step="5" value="80">
+                                    </div>
+                                </div>
+
+                                <div class="calc-divider"></div>
+
+                                <div class="calc-results">
+                                    <div class="calc-result-row">
+                                        <span>Total Daily Ad Revenue:</span>
+                                        <strong id="calc-total-rev">₹8,00,000</strong>
+                                    </div>
+                                    <div class="calc-result-row">
+                                        <span>50% Creator & Viewer Pool:</span>
+                                        <span class="highlight-val text-neon-green" id="calc-creator-pool">₹4,00,000</span>
+                                    </div>
+                                    <div class="calc-result-row">
+                                        <span>50% XYZ Platform Gross Profit:</span>
+                                        <span class="highlight-val text-primary" id="calc-platform-pool">₹4,00,000</span>
+                                    </div>
+                                    <div class="calc-result-row">
+                                        <span>Est. Daily Settlement Fees (Batch UPI):</span>
+                                        <span id="calc-fees">₹2,000</span>
+                                    </div>
+                                    <div class="calc-result-row net-row">
+                                        <span>Net Monthly Platform profit:</span>
+                                        <strong id="calc-net-monthly" class="text-neon-green">₹1,19,40,000</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Alert system -->
+    <div id="alert-toast" class="alert-toast hidden">
+        <i class="fa-solid fa-circle-info"></i>
+        <span class="alert-message">Alert message goes here</span>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="app.js"></script>
+</body>
+</html>
