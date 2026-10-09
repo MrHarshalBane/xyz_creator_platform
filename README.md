@@ -1,4 +1,5 @@
 # XYZ - The Micro-Payout Creator Platform for India
+https://xyz-the-new-operating-sy-p3k1lra.gamma.site/
 
 XYZ is a next-generation platform for Indian creators and viewers (inspired by YouTube and Instagram Reels) that features a revolutionary transaction model: **daily payouts as low as 0.1 paisa (₹0.001)**. 
 
